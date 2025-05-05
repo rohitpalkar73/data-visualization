@@ -1,0 +1,6 @@
+.head-conatiner {
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    height: 56px;
+}

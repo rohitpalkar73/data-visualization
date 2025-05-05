@@ -1,0 +1,111 @@
+<ng-template #content>
+    <div class="row p-5">
+        <div class="col-xs-6">
+            <form [formGroup]="form" class="form-group">
+                <div class="d-flex justify-content-center align-items-center">
+                    <p>Enter Chart Details</p>
+                </div>
+                <hr>
+                <div class="m-2">
+                    <label for="type" class="m-2">Type</label>
+                    <select class="form-select mb-3" id="type"  aria-label=".form-select-lg example" formControlName="type">
+                        <option value="" disabled [selected]="true">Select Visualization Option</option>
+                        <option class="form-select" *ngFor="let element of type; let i as index">
+                            {{element["value"]}}
+                        </option>
+                    </select>
+                </div>
+                <div *ngIf="form.value.type != undefined && form.value.type != ''">
+                    <div class="m-2" *ngIf="form.value.type !== 'Map'">
+                        <label for="height" class="m-2">Height</label>
+                        <input type="number" id="height" class="form-control" placeholder="Enter Height" formControlName="height">
+                    </div>
+                    <div class="m-2" *ngIf="form.value.type !== 'Map'">
+                        <label for="width" class="m-2">Width</label>
+                        <input type="number" id="width" class="form-control" placeholder="Enter Width" formControlName="width">
+                    </div>
+                    <div class="m-2"  *ngIf="form.value.type !== 'Map'">
+                        <label for="xAxis" class="m-2">X</label>
+                        <select class="form-select mb-3" id="xAxis"  aria-label=".form-select-lg example" formControlName="xAxis">
+                            <option value="" disabled [selected]="true">Select X Column</option>
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="m-2"  *ngIf="form.value.type !== 'Map'">
+                        <label for="yAxis" class="m-2">Y</label>
+                        <select class="form-select mb-3" id="yAxis"  aria-label=".form-select-lg example" formControlName="yAxis">
+                            <option value="" disabled [selected]="true">Select Y Column</option>
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="m-2"  *ngIf="form.value.type == 'MultiBar'">
+                        <label for="multiBar" class="m-2">Select GroupBy</label>
+                        <select class="form-select mb-3" id="groupBy"  aria-label=".form-select-lg example" formControlName="groupBy">
+                            <option value="" disabled [selected]="true">Select GroupBy Column</option>
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+
+
+                    <!-- Map Properties -->
+                    <div class="m-2" *ngIf="form.value.type === 'Map'">
+                        <label for="latitude" class="m-2">Latitude</label>
+                        <select class="form-select mb-3" id="latitude"  aria-label=".form-select-lg example" formControlName="latitude">
+                            <!-- <option value="" disabled [selected]="true">Select your latitude column</option> -->
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key" [value]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="m-2" *ngIf="form.value.type === 'Map'">
+                        <label for="longitude" class="m-2">Longitude</label>
+                        <select class="form-select mb-3" id="longitude"  aria-label=".form-select-lg example" formControlName="longitude">
+                            <!-- <option value="" disabled [selected]="true">Select your longitude column</option> -->
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key" [value]="element.key">
+                                {{element.key}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="m-2" *ngIf="form.value.type === 'Map'">
+                        <label for="label" class="m-2">Label</label>
+                        <select class="form-select mb-3" id="label"  aria-label=".form-select-lg example" formControlName="label">
+                            <!-- <option value="" disabled [selected]="true">Select your label column</option> -->
+                            <option class="form-select" *ngFor="let element of data['headers'];" [id]="element.key" [value]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div class="m-2" *ngIf="form.value.type === 'Bar'">
+                        <label for="yScale" class="m-2">YScale</label>
+                        <input type="number" id="yScale" class="form-control" placeholder="Enter Y Scale" formControlName="yScale">
+                    </div>
+                    <div class="m-2" *ngIf="form.value.type === 'Pie'">
+                        <label for="radius" class="m-2">Radius</label>
+                        <input type="number" id="radius" class="form-control" placeholder="Enter Radius" formControlName="radius">
+                    </div>
+                    <div class="m-2" *ngIf="form.value.type === 'Pie'">
+                        <label for="fontsize" class="m-2">Font size</label>
+                        <input type="number" id="fontsize" class="form-control" placeholder="Enter Font size" formControlName="fontsize">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center m-2">
+                        <button type="button" class="btn btn-primary ms-2" (click)="createChart()" [disabled]="!form.valid">Create Chart</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</ng-template>
+<button class="btn btn-primary" (click)="openModal(content)">Add Chart</button>

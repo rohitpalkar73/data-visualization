@@ -1,0 +1,35 @@
+<div class="map-container d-flex flex-column">
+    <div class="form-container">
+        <h3 style="float: inline-end;">Map</h3>
+        <form [formGroup]="form" class="d-flex flex-row w-50 align-items-center">
+            <!-- <label [for]="'Latitude_'+index" class="pe-2 ps-4">Latitude</label>
+            <input type="text" [id]="'Latitude_'+index" class="form-control" placeholder="Latitude" formControlName="latitude">
+            <label [for]="'longitude'+index" class="pe-2 ps-4">Longitude</label>
+            <input type="text" [id]="'longitude_'+index" class="form-control" placeholder="Longitude" formControlName="longitude"> -->
+
+            <label [for]="'Latitude_'+index"  class="m-2">Latitude</label>
+            <select class="form-select" [id]="'Latitude_'+index"  aria-label=".form-select-lg example" formControlName="latitude"  ngbTooltip="Select Latitude Column" placement="top">
+                <option class="form-select" *ngFor="let element of headers; let i as index" [value]="element['key']">
+                    {{element["value"]}}
+                </option>
+            </select>
+
+            <label [for]="'Longitude_'+index"  class="m-2">Longitude</label>
+            <select class="form-select" [id]="'Longitude'+index" aria-label=".form-select-lg example" formControlName="longitude"  ngbTooltip="Select longitude Column" placement="top">
+                <option class="form-select" *ngFor="let element of headers; let i as index" [value]="element['key']">
+                    {{element["value"]}}
+                </option>
+            </select>
+
+            <label [for]="'type_'+index" class="m-2">Label</label>
+            <select class="form-select" [id]="'type'+index"  aria-label=".form-select-lg example" formControlName="label" ngbTooltip="Select Label Column" placement="top">
+                <option class="form-select" *ngFor="let element of headers; let i as index" [value]="element['key']">
+                    {{element["value"]}}
+                </option>
+            </select>
+            <button  class="btn btn-primary ms-2" ngbTooltip="Refresh" placement="right"><i class="bi bi-arrow-clockwise" (click)="init()"></i></button>
+            <!-- <button type="button" class="btn btn-primary ms-2" ngbTooltip="Download" placement="right"><i class="bi bi-download" (click)="downloadMapAsImage()"></i></button> -->
+        </form>
+    </div>
+    <div class="map" [id]="'map_'+index"></div>
+</div>

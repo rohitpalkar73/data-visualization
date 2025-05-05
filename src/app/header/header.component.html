@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light head-conatiner">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home"><h2>Data Visualization</h2></a>
+    </div>
+    <div *ngIf="visualizeMode !== 'userselection'">
+      <button class="btn btn-tertiary text-nowrap" (click)="loginUser()" routerLink="/userselection">User Login</button>
+    </div>
+
+    <div *ngIf="visualizeMode === 'userselection'">
+      <button class="btn btn-tertiary text-nowrap" routerLink="/home">Home</button>
+    </div>
+    <div *ngIf="visualizeMode === 'visualize'">
+      <form class="d-flex" enctype="multipart/form-data">
+        <input class="form-control me-2" type="file" aria-label="Search" accept=".csv" (change)="onAddData($event)">
+      </form>
+    </div>
+    <div *ngIf="visualizeMode === 'home'">
+      <button class="btn btn-tertiary text-nowrap" (click)="scrollToLast()">Contact Me</button>
+    </div>
+</nav>
+  

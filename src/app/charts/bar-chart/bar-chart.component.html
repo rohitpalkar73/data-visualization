@@ -1,0 +1,31 @@
+<div class="chart-container" *ngIf="property && data">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <form [formGroup]="form" class="d-flex flex-row w-75 align-items-center">
+                <label [for]="'height_'+index" class="pe-2 ps-4">Height</label>
+                <input type="number" [id]="'height_'+index" class="form-control" placeholder="height" formControlName="height" min="300" ngbTooltip="Min:300">
+                <label [for]="'width_'+index" class="pe-2 ps-4">Width</label>
+                <input type="number" [id]="'width_'+index" class="form-control" placeholder="width" formControlName="width" min="1000" ngbTooltip="Min:1000">
+                                
+                <label [for]="'xAxis_'+index" class="pe-2 ps-4">X</label>
+                <select class="form-select" [id]="'xAxis'+index"  aria-label=".form-select-lg example" formControlName="xAxis"  ngbTooltip="Select X Axis Column" placement="top">
+                    <option class="form-select" *ngFor="let element of headers; let i as index" [value]="element['key']">
+                        {{element["value"]}}
+                    </option>
+                </select>
+
+                <label [for]="'yAxis_'+index" class="pe-2 ps-4">Y</label>
+                <select class="form-select" [id]="'yAxis'+index"  aria-label=".form-select-lg example" formControlName="yAxis"  ngbTooltip="Select Y Axis Column" placement="top">
+                    <option class="form-select" *ngFor="let element of headers; let i as index" [value]="element['key']">
+                        {{element["value"]}}
+                    </option>
+                </select>
+
+                <button type="button" class="btn btn-primary ms-3" ngbTooltip="Download" placement="right"><i class="bi bi-download" (click)="downloadSVG()"></i></button>
+                <button type="button" class="btn btn-primary ms-3" ngbTooltip="Sort Chart" placement="right"><i class="bi bi-sort-up" (click)="sortData()"></i></button>
+            </form>
+        </div>
+        <h3 class="text-nowrap">Bar Chart</h3>
+    </div>
+    <div [id]="'barChart_'+index" class="view-container mx-auto" style="width: fit-content;"></div>
+</div>
